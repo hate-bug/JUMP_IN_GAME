@@ -105,7 +105,7 @@ public class Board {
 	
 	/**
 	 * Given a piece name and a location. 
-	 * If given has other piece that is not provided piece name, this location is occupied
+	 * If given location has other piece that is not provided piece name, this location is occupied
 	 * @param name
 	 * @param location
 	 * @return True for location occupied, false for not occupied
