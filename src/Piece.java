@@ -8,6 +8,5 @@ public interface Piece {
 	
 	public void setLocation (Tuple location);
 	
-	public boolean equals (Piece temp);
 	
 }

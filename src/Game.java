@@ -20,7 +20,7 @@ public class Game {
 		
 	}
 	
-	public void play () {
+	public void init () {
 		levels(1);
 		System.out.println(this.board.printBoard());
 		boolean finish = false;
@@ -52,52 +52,38 @@ public class Game {
 			System.out.println ("Invalid input");
 			return;
 		}
-		
-		Tuple newLocation, newLocation1, newLocation2;
+	
 		Piece.pieceName command1 = commands.getCommand1();
 		Command.CommandWords command2 = commands.getCommand2();
 		int command3 = commands.getCommand3();
 
 		if (command1 == Piece.pieceName.F1) {
-			newLocation = f1.slide(command2, command3);
-			if (newLocation.isValid() && !this.board.isOccupied(command1.toString(), newLocation)) {
-				board.changePiece(f1, newLocation);
-			} else {
+			
+			if (!board.moveFox(this.f1, command2, command3)) {
 				System.out.println("Invalid move.");
 			}
 			
 		} else if (commands.getCommand1() == Piece.pieceName.F2) {
-			newLocation = f2.slide(command2, command3);
-			if (newLocation.isValid() && !this.board.isOccupied(command1.toString(), newLocation)) {
-				board.changePiece(f2, newLocation);
-			} else {
+			if (!board.moveFox(this.f2, command2, command3)) {
 				System.out.println("Invalid move.");
 			}
 			
 		} else if (commands.getCommand1() == Piece.pieceName.R1) {
-			newLocation = r1.jump(command2, board);
-			if (newLocation.isValid()) {
-				board.changePiece(r1, newLocation);
-			} else {
+			if (!board.moveRabbit(this.r1, command2)) {
 				System.out.println("Invalid move.");
 			}
 
 			
 		} else if (commands.getCommand1() == Piece.pieceName.R2) {
-			newLocation = r2.jump(command2, board);
-			if (newLocation.isValid()) {
-				board.changePiece(r2, newLocation);
-			} else {
+			if (!board.moveRabbit(this.r2, command2)) {
 				System.out.println("Invalid move.");
 			}
 			
 		} else if (commands.getCommand1() == Piece.pieceName.R3) {
-			newLocation = r3.jump(command2, board);
-			if (newLocation.isValid()) {
-				board.changePiece(r3, newLocation);
-			} else {
+			if (!board.moveRabbit(this.r3, command2)) {
 				System.out.println("Invalid move.");
 			}
+
 		
 		}
 	}

@@ -21,15 +21,6 @@ public class Mushroom implements Piece {
 	public void setLocation(Tuple location) {
 		this.location = location;
 		
-	}
-
-	@Override
-	public boolean equals(Piece temp) {
-		if (temp.getName() == this.name) {
-			return true;
-		}
-		return false;
-	}
-	
+	}	
 
 }

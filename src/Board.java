@@ -1,6 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class Board {
 	private final static int row=5;
 	private final static int column=5;
@@ -16,7 +17,7 @@ public class Board {
 	}
 	
 	/**
-	 * Initialize the board, add everything to the board including hole
+	 * Initialize the board, add everything to the board including hole, dots and pieces
 	 */
 	private void setupBoard () {
 		this.grid = new String[row][column]; 
@@ -66,19 +67,18 @@ public class Board {
 		return boardInfo;
 	}
 	
+	/**
+	 * Put the piece to the board 
+	 * Change the hashmap inside the board, hasmap stores pairs of piecesEnum name and their corresponding location (Tuple)
+	 * @param piece
+	 * @param location
+	 */
 	public void putPiece (Piece piece, Tuple location) {
 		this.pieceLocations.put(piece.getName(), location);
 		piece.setLocation(location);
 		
 	}
-	
-	public void changePiece (Piece piece, Tuple location) {
-		this.pieceLocations.remove(piece.getName());
-		this.pieceLocations.put(piece.getName(), location);
-		piece.setLocation(location);
 		
-	}
-	
 	public boolean isFinished () {
 		int inHole = 0;
 		if (!(this.grid[0][0]).equals("O")) {
@@ -103,7 +103,14 @@ public class Board {
 		}
 	}
 	
-	public boolean isOccupied (String name, Tuple location) {
+	/**
+	 * Given a piece name and a location. 
+	 * If given has other piece that is not provided piece name, this location is occupied
+	 * @param name
+	 * @param location
+	 * @return True for location occupied, false for not occupied
+	 */
+	private boolean isOccupied (String name, Tuple location) {
 		if (location.has4Value()) {
 			boolean aOccupied = true;
 			boolean bOccupied = true;
@@ -145,5 +152,124 @@ public class Board {
 			}
 			return true;
 		}
+	}
+	
+	/**
+	 * Method for move a fox inside the board based on providing direction and distance
+	 * @param piece
+	 * @param direction
+	 * @param distance
+	 * @return true for move successfully, false for invalid command
+	 */
+	public boolean moveFox (Piece piece, Command.CommandWords direction, int distance) {
+		int x1 = piece.getLocation().getRowNum();
+		int y1 = piece.getLocation().getColNum();
+		int x2 = piece.getLocation().getRow1Num();
+		int y2 = piece.getLocation().getCol1Num();
+		Tuple newLocation = new Tuple(-1, -1, -1, -1); 
+		if (direction == Command.CommandWords.UP) {
+			if (y1 == y2 && Math.min(x1, x2)-distance >= 0) {
+				
+				newLocation = new Tuple (x1-distance, y1, x2-distance, y2);
+			}
+
+		} else if (direction == Command.CommandWords.DOWN) {
+			if (y1 == y2 && Math.max(x1, x2)+distance < 5) {
+				
+				newLocation = new Tuple (x1+distance, y1, x2+distance, y2);
+			} 
+		} else if (direction == Command.CommandWords.LEFT) {
+			if (x1 == x2 && Math.min(y1, y2)-distance >= 0) {
+			
+				newLocation = new Tuple (x1, y1-distance, x2, y2-distance);
+			}
+			
+		} else if (direction == Command.CommandWords.RIGHT) {
+			if (x1 == x2 && Math.max(y1, y2)+distance < 5) {
+				
+				newLocation = new Tuple (x1, y1+distance, x2, y2+distance);
+			}
+		}
+		if (newLocation.isValid() && !isOccupied(piece.getName().toString(), newLocation)) {
+			putPiece(piece, newLocation);
+			return true; 
+		}
+		return false;
+		
+	}
+	
+	/**
+	 * Method to move the rabbit, determine if it;s a valid command with providing direction
+	 * @param piece
+	 * @param direction
+	 * @return true for move successfully, false for wrong move
+	 */
+	public boolean moveRabbit (Piece piece, Command.CommandWords direction) {
+		int x = piece.getLocation().getRowNum();
+		int y = piece.getLocation().getColNum();
+		String name = piece.getName().toString();
+		if (direction == Command.CommandWords.UP && x-2 >=0 && isOccupied(name, new Tuple (x-1, y))) {
+			//return new Tuple (x-1, y, x-2, y);
+			int i=2;
+			while (isOccupied(name, new Tuple (x-i, y))) {
+				if (x-i <0) {
+					return false;
+				} else if (!isOccupied(name, new Tuple (x-i, y))) {
+					
+					putPiece(piece, new Tuple (x-i, y));
+					return true;
+				}
+				i++;
+			}
+			putPiece(piece, new Tuple (x-i, y));
+			return true;
+		} else if (direction == Command.CommandWords.DOWN && x+2<5 && isOccupied(name, new Tuple (x+1, y))) {
+			//return new Tuple(x+1, y, x+2, y);
+			int i=2;
+			while (isOccupied(name, new Tuple (x+i, y))) {
+				if (x+i >4) {
+					return false;
+				} else if (!isOccupied(name, new Tuple (x+i, y))) {
+					putPiece(piece, new Tuple (x+i, y));
+					return true;
+				}
+				i++;
+			}
+			putPiece(piece, new Tuple(x+i, y));
+			return true;
+		} else if (direction == Command.CommandWords.LEFT && y-2>=0 && isOccupied(name, new Tuple (x, y-1))) {
+			//return new Tuple(x, y-1, x, y-2);
+			int i=2;
+			while (isOccupied(name, new Tuple (x, y-i))) {
+
+				if (y-i <0) {
+					return false;
+				} else if (!isOccupied(name, new Tuple (x, y-i))) {
+					putPiece(piece, new Tuple (x, y-i));
+					return true;
+				}
+				i++;
+			}
+			putPiece(piece, new Tuple (x, y-i));
+			return true;
+			
+		} else if (direction == Command.CommandWords.RIGHT && y+2<5 && isOccupied(name, new Tuple (x, y+1))) {
+			//return new Tuple(x, y+1, x, y+2);
+			int i=2;
+			while (isOccupied(name, new Tuple (x, y+i))) {
+			
+				if (y+i >4) {
+					return false;
+				} else if (!isOccupied(name, new Tuple (x, y+i))) {
+					putPiece(piece, new Tuple (x, y+i));
+					return true;
+				}
+				i++;
+			}
+			putPiece(piece, new Tuple(x, y+i));
+			return true;
+			
+		}
+		return false;
 	}
 }
