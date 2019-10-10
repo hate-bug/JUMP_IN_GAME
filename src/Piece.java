@@ -1,4 +1,8 @@
-
+/**
+ * An interface for all pieces on the board
+ * @author zheji
+ *
+ */
 public interface Piece {
 	public static enum pieceName {R1, R2, R3, F1, F2, M1, M2, FINISH};
 	

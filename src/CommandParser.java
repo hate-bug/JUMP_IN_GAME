@@ -1,3 +1,7 @@
+/**
+ * Command parser for the input from the console 
+ * @author zheji
+ */
 import java.util.*;
 
 public class CommandParser {

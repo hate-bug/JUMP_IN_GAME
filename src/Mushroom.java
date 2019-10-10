@@ -1,4 +1,8 @@
-
+/**
+ * A Mushroom class store the location and name of the mushroom
+ * @author zheji
+ *
+ */
 public class Mushroom implements Piece {
 	
 	private pieceName name; 

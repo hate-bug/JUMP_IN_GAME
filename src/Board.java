@@ -1,3 +1,7 @@
+/**
+ * The board is the model of the game, stores all pieces on it and decide if player can move the piece to desired place 
+ * @author zheji
+ */
 import java.util.HashMap;
 import java.util.Map;
 
@@ -190,7 +194,7 @@ public class Board {
 				newLocation = new Tuple (x1, y1+distance, x2, y2+distance);
 			}
 		}
-		if (newLocation.isValid() && !isOccupied(piece.getName().toString(), newLocation)) {
+		if (newLocation.isValidfor2() && !isOccupied(piece.getName().toString(), newLocation)) {
 			putPiece(piece, newLocation);
 			return true; 
 		}

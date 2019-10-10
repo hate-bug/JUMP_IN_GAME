@@ -1,4 +1,8 @@
-
+/**
+ * A rabbit class which used to store the rabbit name and it's location (x1, y1, x2, y2)
+ * @author zheji
+ *
+ */
 public class Rabbit implements Piece{
 	
 	private Tuple location;
@@ -18,7 +22,7 @@ public class Rabbit implements Piece{
 	
 	/**
 	 * Getter for the current rabbit name
-	 * @return
+	 * @return the enum value of Rabbit name
 	 */
 	public pieceName getName () {
 		return this.name;

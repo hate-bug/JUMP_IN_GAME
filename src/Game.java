@@ -1,6 +1,13 @@
-
+/**
+ * Initialize the game and handle the interface between player and all game 
+ * ALso decide when to finish the game 
+ * @author zheji
+ *
+ */
 public class Game {
 	
+	private final String INVALIDINFO = "Invalid move!" ;
+	private final String WININFO = "You win!!!";
 	private Board board; 
 	private Fox f1, f2; 
 	private Mushroom m1, m2; 
@@ -20,7 +27,10 @@ public class Game {
 		
 	}
 	
-	public void init () {
+	/**
+	 * Method to start the game
+	 */
+	public void play () {
 		levels(1);
 		System.out.println(this.board.printBoard());
 		boolean finish = false;
@@ -30,9 +40,14 @@ public class Game {
 			System.out.println(this.board.printBoard());
 			finish = this.board.isFinished();
 		}
-		System.out.println("You win!!!");
+		System.out.println(WININFO);
 	}
 	
+	/**
+	 * Method to store the piece initial location on the board 
+	 * For now we just have one level, set it to one by default
+	 * @param level
+	 */
 	private void levels (int level) {
 		if (level == 1) {
 			board.putPiece(f1, new Tuple (0, 1, 1, 1)); // fox 1
@@ -46,10 +61,15 @@ public class Game {
 		
 	}
 	
+	/**
+	 * Method to process command 
+	 * Command would be either move a Fox to a direction of distance or move a Rabbit with just direction
+	 * @param commands
+	 */
 	private void processCommands (Command commands) {
 				
 		if (!commands.isValidCommand()) {
-			System.out.println ("Invalid input");
+			System.out.println (INVALIDINFO);
 			return;
 		}
 	
@@ -60,28 +80,28 @@ public class Game {
 		if (command1 == Piece.pieceName.F1) {
 			
 			if (!board.moveFox(this.f1, command2, command3)) {
-				System.out.println("Invalid move.");
+				System.out.println(INVALIDINFO);
 			}
 			
 		} else if (commands.getCommand1() == Piece.pieceName.F2) {
 			if (!board.moveFox(this.f2, command2, command3)) {
-				System.out.println("Invalid move.");
+				System.out.println(INVALIDINFO);
 			}
 			
 		} else if (commands.getCommand1() == Piece.pieceName.R1) {
 			if (!board.moveRabbit(this.r1, command2)) {
-				System.out.println("Invalid move.");
+				System.out.println(INVALIDINFO);
 			}
 
 			
 		} else if (commands.getCommand1() == Piece.pieceName.R2) {
 			if (!board.moveRabbit(this.r2, command2)) {
-				System.out.println("Invalid move.");
+				System.out.println(INVALIDINFO);
 			}
 			
 		} else if (commands.getCommand1() == Piece.pieceName.R3) {
 			if (!board.moveRabbit(this.r3, command2)) {
-				System.out.println("Invalid move.");
+				System.out.println(INVALIDINFO);
 			}
 
 		

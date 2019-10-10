@@ -1,4 +1,8 @@
-
+/**
+ * A fox piece which has it name and its location
+ * @author zheji
+ *
+ */
 public class Fox implements Piece{
 	
 	private Tuple location; 
