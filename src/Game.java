@@ -1,7 +1,7 @@
 /**
  * Initialize the game and handle the interaction between player and all game 
  * ALso decide when to finish the game 
- * @author Zhe ji, Junyuan Chen
+ * @author Zhe Ji, Junyuan Chen
  * 
  */
 public class Game {
@@ -74,7 +74,7 @@ public class Game {
 		Piece.pieceName command1 = commands.getCommand1();
 		Command.CommandWords command2 = commands.getCommand2();
 		int command3 = commands.getCommand3();
-
+		
 		if (command1 == Piece.pieceName.F1) {
 			
 			if (!board.moveFox(this.f1, command2, command3)) {

@@ -1,6 +1,7 @@
+
 /**
  * A class to create and store all commands
- * @author , Junyun Chen
+ * @author Zhe Ji, Junyun Chen
  *
  */
 public class Command {
@@ -48,6 +49,9 @@ public class Command {
 	public boolean addCommand (String word1, String word2) {
 		try {
 			this.word1 = Piece.pieceName.valueOf(word1); 
+			if (word1.equals(Piece.pieceName.F1.toString()) || word1.equals(Piece.pieceName.F2.toString())) { // if fox without distance, wrong command. 
+				return false;
+			}
 			this.word2 = CommandWords.valueOf(word2);
 			this.isValid = true;
 		} catch (IllegalArgumentException e) {
