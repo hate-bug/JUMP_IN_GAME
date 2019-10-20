@@ -2,7 +2,7 @@
  * A self-created Tuple data structure for this game
  * Store a piece of coordinator like (2, 4), get rid of array
  * Also be able to store a couple of coordinator. 
- * @author zheji
+ * @author zheji, Defa Lu 
  *
  */
 public class Tuple {

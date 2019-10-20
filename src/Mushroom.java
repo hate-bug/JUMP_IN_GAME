@@ -1,6 +1,6 @@
 /**
  * A Mushroom class store the location and name of the mushroom
- * @author zheji
+ * @author xiling Wang 
  *
  */
 public class Mushroom implements Piece {

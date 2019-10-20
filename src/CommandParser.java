@@ -1,7 +1,8 @@
 /**
  * Command parser for the input from the console 
- * @author zheji
+ * @author jiawei Ma
  */
+
 import java.util.*;
 
 public class CommandParser {
@@ -14,6 +15,11 @@ public class CommandParser {
 		this.scanner = new Scanner(System.in);
 	}
 	
+	/**
+	 * Split the user input by the space. 
+	 * Ex: If user input is f1 right 3, three command created: f1, right and integer 3. 
+	 * @return the command that represents the user inputs
+	 */
 	public Command getCommand () {
 		String input; 
 		String [] words;

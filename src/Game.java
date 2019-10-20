@@ -1,17 +1,15 @@
 /**
- * Initialize the game and handle the interface between player and all game 
+ * Initialize the game and handle the interaction between player and all game 
  * ALso decide when to finish the game 
- * @author zheji
- *
+ * @author Zhe ji, Junyuan Chen
+ * 
  */
 public class Game {
 	
 	private final String INVALIDINFO = "Invalid move!" ;
 	private final String WININFO = "You win!!!";
 	private Board board; 
-	private Fox f1, f2; 
-	private Mushroom m1, m2; 
-	private Rabbit r1, r2, r3;
+	private Piece f1, f2, m1, m2, r1, r2, r3; 
 	private CommandParser parser; 
 	
 	public Game () {

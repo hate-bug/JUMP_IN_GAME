@@ -1,6 +1,6 @@
 /**
  * The board is the model of the game, stores all pieces on it and decide if player can move the piece to desired place 
- * @author zheji
+ * @author zhe Ji, XiLing Wang, Junyuan Chen, Defa Hu, Jiawei Ma 
  */
 import java.util.HashMap;
 import java.util.Map;

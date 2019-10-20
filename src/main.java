@@ -1,3 +1,8 @@
+/**
+ * Initiate the game
+ * @author zheji
+ *
+ */
 
 public class main {
 

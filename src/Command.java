@@ -1,6 +1,6 @@
 /**
  * A class to create and store all commands
- * @author zheji
+ * @author , Junyun Chen
  *
  */
 public class Command {

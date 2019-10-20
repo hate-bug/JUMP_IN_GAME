@@ -1,6 +1,6 @@
 /**
  * A fox piece which has it name and its location
- * @author zheji
+ * @author defa Lu, Jiawei Ma
  *
  */
 public class Fox implements Piece{
