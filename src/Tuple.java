@@ -46,6 +46,23 @@ public class Tuple {
 		}
 	}
 	
+	public void setRowNum (int x) {
+		this.x = x;
+	}
+	
+	public void setColNum (int y) {
+		this.y = y;
+	}
+
+	public void setRow1Num (int x1) {
+		this.x1 = x1;
+	}
+
+	public void setCol1Num (int y1) {
+		this.y1 = y1;
+	}
+
+	
 	public int getRowNum () {
 		return this.x;
 	}

@@ -14,16 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/ReadME.txt</name>
-			<type>1</type>
-			<location>/Users/zheji/Desktop/untitled folder/ReadME.txt</location>
-		</link>
-		<link>
-			<name>src/Sequence_Diagram.png</name>
-			<type>1</type>
-			<location>/Users/zheji/Desktop/untitled folder/Diagram 2019-10-20 17-13-58.png</location>
-		</link>
-	</linkedResources>
 </projectDescription>
