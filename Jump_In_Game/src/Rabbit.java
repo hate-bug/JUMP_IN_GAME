@@ -5,17 +5,8 @@
  */
 public class Rabbit extends Piece{
 	
-	private Tuple location;
-	private pieceName name; 
-	
 	public Rabbit (pieceName name) {
-		this.name = name;
-	}
-
-	@Override
-	public void setLocation(Tuple location) {
-		this.location = location;
-		
+		super(name);
 	}
 
 }

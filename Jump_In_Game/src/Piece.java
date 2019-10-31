@@ -8,6 +8,10 @@ public abstract class Piece {
 	private Tuple location;
 	private pieceName name;
 	
+	public Piece (pieceName name) {
+		this.name = name;
+	}
+	
 	public Tuple getLocation() {
 		return this.location;
 	}
@@ -16,7 +20,9 @@ public abstract class Piece {
 		return this.name;
 	}
 	
-	public abstract void setLocation (Tuple location);
+	public void setLocation (Tuple location) {
+		this.location = location;
+	}
 	
 	
 }
