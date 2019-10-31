@@ -3,7 +3,7 @@
  * @author defa Lu, Jiawei Ma
  *
  */
-public class Fox implements Piece{
+public class Fox extends Piece{
 	
 	private Tuple location; 
 	private pieceName name; 

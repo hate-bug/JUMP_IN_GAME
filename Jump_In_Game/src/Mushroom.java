@@ -3,7 +3,7 @@
  * @author xiling Wang 
  *
  */
-public class Mushroom implements Piece {
+public class Mushroom extends Piece {
 	
 	private pieceName name; 
 	private Tuple location; 
