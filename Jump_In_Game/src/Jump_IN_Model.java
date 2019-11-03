@@ -174,15 +174,22 @@ public class Jump_IN_Model {
 	public Piece.pieceName getPiece (Tuple location) {
 		int x = location.getRowNum();
 		int y = location.getColNum();
-		String pieceName = this.grid[x][y]; 
-		if (pieceName.startsWith("F") || pieceName.startsWith("R")) {
-			return Piece.pieceName.valueOf(pieceName);
-		} else {
+		if (this.grid == null) {
 			return null;
+		} else {
+			String pieceName = this.grid[x][y]; 
+			if (pieceName.startsWith("F") || pieceName.startsWith("R")) {
+				return Piece.pieceName.valueOf(pieceName);
+			} else {
+				return null;
+			}
 		}
 	}
 	
 	public boolean movePiece (Piece piece, Tuple destination) {
+		if (this.selected == null) {
+			return false;
+		}
 		String pieceName = this.selected.toString();
 		destination = new Tuple (destination.getRowNum(), destination.getColNum());
 		if (!isOccupied(pieceName, destination)) {//destination is not occupied

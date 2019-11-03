@@ -1,5 +1,5 @@
 /**
- * An interface for all pieces on the board
+ * An abstract class for all pieces on the board
  * @author zheji
  *
  */

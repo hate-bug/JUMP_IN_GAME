@@ -96,8 +96,12 @@ public class Jump_IN_View extends JFrame {
 	
 	public int levelInputDialog () {
 		try {
-			int level = Integer.valueOf(JOptionPane.showInputDialog("Please enter a level. 0-10"));
-			return level;
+			int level = Integer.valueOf(JOptionPane.showInputDialog("Please enter a level. 0-2"));
+			if (level<3 && level>0) {
+				return level;
+			} else {
+				JOptionPane.showMessageDialog(this, "Please enter a integer smaller than 3");
+			}
 		}catch (IllegalArgumentException e) {
 			JOptionPane.showMessageDialog(this, "Please enter a valid integer");
 		}
