@@ -47,5 +47,7 @@ Java Design:
 		4. Jump_IN_View used to display the UI and collect users' gesture. 
 		5. Jump_IN_Controller used to transfer user's input to internal methods. 
 		6. Using Tuple to represent the location (x, y), (x1, y1, x2, y2)
+		7. Jump_IN_Crontroller captures user events from view and use ActionPerformed to notify the model. 
+		8. Model return value to verify the backend has already done the change or not and then update to the view. 
 		
 		
