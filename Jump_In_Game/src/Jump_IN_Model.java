@@ -4,6 +4,7 @@
  */
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 
 public class Jump_IN_Model {
@@ -12,11 +13,14 @@ public class Jump_IN_Model {
 	private final static String hole = "O";
 	private String[][] grid;
 	private HashMap<Piece.pieceName, Tuple> pieceLocations;
+	private Stack <HashMap<Piece.pieceName, Tuple>> history;
+	private Stack <HashMap<Piece.pieceName, Tuple>> redoStack;
 	private Piece.pieceName selected=null;
 	public Jump_IN_Model () {
 		
 		pieceLocations = new HashMap<Piece.pieceName, Tuple>();
-		
+		history = new Stack<HashMap<Piece.pieceName, Tuple>>();
+		redoStack = new Stack<HashMap<Piece.pieceName,Tuple>>();
 	}
 	
 	/**
@@ -186,12 +190,18 @@ public class Jump_IN_Model {
 		}
 	}
 	
+	/**
+	 * Move the piece to the the desired location and then return if it's a valid move
+	 * @param piece
+	 * @param destination
+	 * @return true if it's a valid move
+	 */
 	public boolean movePiece (Piece piece, Tuple destination) {
 		if (this.selected == null) {
 			return false;
 		}
 		String pieceName = this.selected.toString();
-		destination = new Tuple (destination.getRowNum(), destination.getColNum());
+		//destination = new Tuple (destination.getRowNum(), destination.getColNum());
 		if (!isOccupied(pieceName, destination)) {//destination is not occupied
 			if (pieceName.startsWith("F")) {
 				Tuple currentLocation = this.pieceLocations.get(this.selected);
@@ -216,6 +226,7 @@ public class Jump_IN_Model {
 						int toy2 = toy1;
 						destination.setRow1Num(tox2);
 						destination.setCol1Num(toy2);
+						addHistory();
 						putPiece(piece, destination);
 						return true;
 					}
@@ -224,6 +235,7 @@ public class Jump_IN_Model {
 						int toy2 = toy1;
 						destination.setRow1Num(tox2);
 						destination.setCol1Num(toy2);
+						addHistory();
 						putPiece(piece, destination);
 						return true;
 					}
@@ -240,6 +252,7 @@ public class Jump_IN_Model {
 						int tox2 = tox1; 
 						destination.setRow1Num(tox2);
 						destination.setCol1Num(toy2);
+						addHistory();
 						putPiece(piece, destination);
 						return true;
 					}
@@ -249,6 +262,7 @@ public class Jump_IN_Model {
 						int tox2 = tox1; 
 						destination.setRow1Num(tox2);
 						destination.setCol1Num(toy2);
+						addHistory();
 						putPiece(piece, destination);
 						return true;
 					}
@@ -271,6 +285,7 @@ public class Jump_IN_Model {
 							return false;
 						}
 					}
+					addHistory();
 					putPiece(piece, destination);
 					return true;
 				} 
@@ -280,6 +295,7 @@ public class Jump_IN_Model {
 							return false;
 						}
 					}
+					addHistory();
 					putPiece(piece, destination);
 					return true;
 				}
@@ -288,5 +304,53 @@ public class Jump_IN_Model {
 		
 		return false;
 	}
-
+	
+	private void addHistory() {
+		HashMap<Piece.pieceName, Tuple> currentStatus = new HashMap<Piece.pieceName, Tuple>(); 
+		currentStatus.putAll(this.pieceLocations);
+		this.history.push(currentStatus);
+	}
+	
+	/**
+	 * Get the history of the board for the UNDO functionality
+	 */
+	public boolean rollBack(){
+		if (this.history.size()>0) {
+			addRedo();
+			this.pieceLocations = new HashMap<Piece.pieceName, Tuple>();
+			this.pieceLocations.putAll(history.pop());
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	private void addRedo() {
+		HashMap<Piece.pieceName, Tuple> currentStatus = new HashMap<Piece.pieceName, Tuple>(); 
+		currentStatus.putAll(this.pieceLocations);
+		this.redoStack.push(currentStatus);
+	}
+	
+	public boolean goForward() {
+		if (this.redoStack.size()>0) {
+			this.pieceLocations = new HashMap<Piece.pieceName, Tuple>();
+			this.pieceLocations.putAll(redoStack.peek());
+			this.history.push(redoStack.pop());
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public void cleanRedo () {
+		this.redoStack.clear();
+	}
+	
+	public String findSolver() {
+		HashMap<Piece.pieceName, Tuple> currentLocations = new HashMap<Piece.pieceName, Tuple>();
+		currentLocations.putAll(this.pieceLocations);
+		Solver solver = new Solver(currentLocations);
+		return solver.getNextStep();
+	}
 }

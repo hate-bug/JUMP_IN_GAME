@@ -29,6 +29,9 @@ public class Jump_IN_Controller {
 		m2 = new Mushroom(Piece.pieceName.M2);
 		this.view.addChooseLevelButtonListener(new chooseLevel1ButtonListener());
 		this.view.addNewGameButtonListener(new newGameButtonListener());
+		this.view.addUndoButtonListener(new UndoButtonListener());
+		this.view.addRedoButtonListener(new RedoButtonListener());
+		this.view.addHintButtonListener(new HintButtonListener());
 		for (int x=0; x<5; x++) {
 			for (int y=0; y<5; y++) {
 				this.view.addGridButtonListener(x, y, new GridButtonListener(new Tuple(x, y)));
@@ -104,6 +107,8 @@ public class Jump_IN_Controller {
 					this.piece = r3;
 				}
 				if (model.movePiece(this.piece, this.pieceLocation)) {//valid move, notify view
+					//view.cleaeHintText();
+					model.cleanRedo();
 					model.setSelectedPiece(null);
 					view.setSelected("");
 					view.setupButtons(model.setupBoard());
@@ -137,9 +142,10 @@ public class Jump_IN_Controller {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (level == -1) {
-				view.setLabel("Please set level first.", Color.RED);
+				view.setLevelLabel("Please set level first.", Color.RED);
 			} else {
 				play();
+				view.cleaeHintText();
 			}
 			
 		}
@@ -152,10 +158,40 @@ public class Jump_IN_Controller {
 		public void actionPerformed(ActionEvent e) {
 			setLevel(view.levelInputDialog());
 			if (level >0) {
-				view.setLabel("Level: " + String.valueOf(level), Color.BLUE);
+				view.setLevelLabel("Level: " + String.valueOf(level), Color.BLUE);
 			}
 		}
 		
 	}
+	
+	public class UndoButtonListener implements ActionListener {
 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			model.rollBack();
+			view.setupButtons(model.setupBoard());
+		}
+		
+	}
+	
+	public class RedoButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			model.goForward();
+			view.setupButtons(model.setupBoard());
+		}
+		
+	}
+	
+	public class HintButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			view.cleaeHintText();
+			String hint = model.findSolver();
+			view.setHintText(hint, Color.RED);
+		}
+		
+	}
 }

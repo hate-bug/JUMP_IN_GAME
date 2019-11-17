@@ -94,4 +94,15 @@ public class Tuple {
 	public boolean isValidfor2 () {
 		return (x>=0 && y>=0 && x1>=0 && y1>=0);
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Tuple) {
+			Tuple location = (Tuple) o; 
+			if (location.getRowNum() == this.getRowNum() && location.getColNum() == this.getColNum()) {
+				return true;
+			}
+		} 
+		return false;
+	}
 }

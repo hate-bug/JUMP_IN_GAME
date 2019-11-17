@@ -25,10 +25,14 @@ public class Jump_IN_View extends JFrame {
 	private JMenuItem startMenu = new JMenuItem ("Start Game");
 	private JMenu levelMenu = new JMenu("Level");
 	private JMenuItem chooseLevel1Menu = new JMenuItem("Choose Level");
+	private JButton undoButton = new JButton ("Undo");
+	private JButton redoButton = new JButton("Redo");
+	private JButton hintButton = new JButton("Hint");
 	private JLabel gameInfo = new JLabel("Please choose level", SwingConstants.CENTER);
+	private JLabel hintInfo = new JLabel("Hint section", SwingConstants.CENTER);
 	private GridLayout BoardLayout = new GridLayout(5, 5);
 	private JButton grid[][];
-	private JPanel panel;
+	private JPanel upPanel, panel;
 	private static final String dot = "\u2022";
 	
 	public Jump_IN_View () {
@@ -38,7 +42,15 @@ public class Jump_IN_View extends JFrame {
 		this.menubar.add(levelMenu);
 		this.levelMenu.add(chooseLevel1Menu);
 		super.setJMenuBar(menubar);
-		super.add(gameInfo, BorderLayout.NORTH);
+		
+		upPanel = new JPanel(); 
+		upPanel.add(gameInfo);
+		upPanel.add(undoButton);
+		upPanel.add(redoButton);
+		upPanel.add(hintButton);
+		upPanel.add(hintInfo);
+		hintInfo.setSize(100, 200);
+		super.add(upPanel, BorderLayout.NORTH);
 		
 		panel = new JPanel();
 		panel.setLayout(BoardLayout);
@@ -56,7 +68,7 @@ public class Jump_IN_View extends JFrame {
 
 		super.add(panel, BorderLayout.CENTER);
 		
-		super.setSize(700, 700);
+		super.setSize(900, 900);
 		super.setName("Jump In Game");
 		super.setVisible(true);
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,13 +99,25 @@ public class Jump_IN_View extends JFrame {
 		JOptionPane.showMessageDialog(this, info);
 	}
 	
-	public void setLabel (String content, Color color) {
+	public void setLevelLabel (String content, Color color) {
 		
 		this.gameInfo.setText(content);
 		this.gameInfo.setForeground(color);
 		
 	}
 	
+	public void setHintText (String content, Color color) {
+		
+		this.hintInfo.setText(content);
+		this.hintInfo.setForeground(color);
+		
+	}
+	
+	public void cleaeHintText() {
+		this.hintInfo.setText("");
+	}
+
+		
 	public int levelInputDialog () {
 		try {
 			int level = Integer.valueOf(JOptionPane.showInputDialog("Please enter a level. 0-2"));
@@ -121,4 +145,15 @@ public class Jump_IN_View extends JFrame {
 		grid[x][y].addActionListener(GridButtonListener);		
 	}
 	
+	public void addUndoButtonListener (ActionListener UndoButtonListener) {
+		this.undoButton.addActionListener(UndoButtonListener);
+	}
+	
+	public void addRedoButtonListener (ActionListener RedoButtonListener) {
+		this.redoButton.addActionListener(RedoButtonListener);
+	}
+	
+	public void addHintButtonListener (ActionListener HintButtonListener) {
+		this.hintButton.addActionListener(HintButtonListener);
+	}
 }
