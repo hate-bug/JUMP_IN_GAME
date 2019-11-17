@@ -77,6 +77,7 @@ public class Jump_IN_Controller {
 			model.putPiece(r1, new Tuple (0, 1)); // Rabbit 1
 			model.putPiece(r2, new Tuple (3, 4)); // Rabbit 2
 			model.putPiece(r3, new Tuple (2, 1)); // Rabbit 3
+			this.model.setupBoard();
 			this.view.setupButtons(model.setupBoard());
 		}
 		
@@ -114,6 +115,7 @@ public class Jump_IN_Controller {
 					view.setupButtons(model.setupBoard());
 					if (model.isFinished()) {
 						view.showDialog("Game finished, you win!");
+						view.cleaeHintText();
 						play();					
 					}
 				} else { //invalid move, show dialog
@@ -168,8 +170,12 @@ public class Jump_IN_Controller {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			model.rollBack();
-			view.setupButtons(model.setupBoard());
+			if (model.rollBack()) {
+				view.setupButtons(model.setupBoard());
+			} else {
+				view.showDialog("Can not undo righr now.");
+			}
+			
 		}
 		
 	}
@@ -178,8 +184,12 @@ public class Jump_IN_Controller {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			model.goForward();
-			view.setupButtons(model.setupBoard());
+			if (model.goForward()) {
+				view.setupButtons(model.setupBoard());
+			} else {
+				view.showDialog("Can not redo righr now.");
+			}
+			
 		}
 		
 	}

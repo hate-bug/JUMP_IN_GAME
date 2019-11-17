@@ -34,7 +34,7 @@ public class Solver {
 			for (Map.Entry<Piece.pieceName, Tuple> element: nextStep.entrySet()) {
 				if (element.getKey().toString().startsWith("F") || element.getKey().toString().startsWith("R")) {
 					if (!element.getValue().equals(lastBoard.get(element.getKey()))) {
-						hint= hint + getMoveString (lastBoard.get(element.getKey()), element.getValue(), element.getKey().toString()) + "\n";
+						hint= hint + getMoveString (lastBoard.get(element.getKey()), element.getValue(), element.getKey().toString());
 					}
 				}
 			}

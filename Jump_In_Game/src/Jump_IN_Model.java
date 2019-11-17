@@ -112,6 +112,8 @@ public class Jump_IN_Model {
 			inHole ++; 
 		}
 		if (inHole == 3) {
+			this.history.clear();
+			this.redoStack.clear();
 			return true;
 		} else {
 			return false;
@@ -348,9 +350,11 @@ public class Jump_IN_Model {
 	}
 	
 	public String findSolver() {
+		
 		HashMap<Piece.pieceName, Tuple> currentLocations = new HashMap<Piece.pieceName, Tuple>();
 		currentLocations.putAll(this.pieceLocations);
 		Solver solver = new Solver(currentLocations);
 		return solver.getNextStep();
+		
 	}
 }

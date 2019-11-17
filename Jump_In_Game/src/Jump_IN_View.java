@@ -114,7 +114,7 @@ public class Jump_IN_View extends JFrame {
 	}
 	
 	public void cleaeHintText() {
-		this.hintInfo.setText("");
+		this.hintInfo.setText("Hint section");
 	}
 
 		

@@ -17,7 +17,7 @@ public class Tree {
 	 */
 	public boolean addChild (Node parent, Node children) {
 		//if child is existing or parent does not exist, return false
-		if (this.getNode(this.root, children)!=null && this.getNode(this.root, parent)==null) {
+		if (this.getNode(this.root, children)!=null || this.getNode(this.root, parent)==null) {
 			return false;
 		} else {
 			this.getNode(this.root, parent).addChild(children);
