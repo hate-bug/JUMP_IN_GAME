@@ -63,7 +63,7 @@ public class Jump_IN_Controller {
 			model.putPiece(f2, new Tuple (3, 3, 3, 4)); // fox 2
 			model.putPiece(m1, new Tuple (1, 3)); // mushroom 1 
 			model.putPiece(m2, new Tuple (4, 2)); // mushroom 2
-			model.putPiece(r1, new Tuple (0, 3)); // Rabbit 1
+			model.putPiece(r1, new Tuple (2, 3)); // Rabbit 1
 			model.putPiece(r2, new Tuple (2, 4)); // Rabbit 2
 			model.putPiece(r3, new Tuple (4, 1)); // Rabbit 3
 			this.view.setupButtons(model.setupBoard());
@@ -74,7 +74,7 @@ public class Jump_IN_Controller {
 			model.putPiece(f2, new Tuple (3, 0, 3, 1)); // fox 2
 			model.putPiece(m1, new Tuple (1, 1)); // mushroom 1 
 			model.putPiece(m2, new Tuple (1, 2)); // mushroom 2
-			model.putPiece(r1, new Tuple (0, 1)); // Rabbit 1
+			model.putPiece(r1, new Tuple (2, 3)); // Rabbit 1
 			model.putPiece(r2, new Tuple (3, 4)); // Rabbit 2
 			model.putPiece(r3, new Tuple (2, 1)); // Rabbit 3
 			this.model.setupBoard();
