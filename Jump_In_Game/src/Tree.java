@@ -1,3 +1,7 @@
+/**
+ * Author: Zhe Ji 
+ * A tree structure that used to store node and traverse through all node
+ */
 import java.util.ArrayList;
 import java.util.Collections;
 

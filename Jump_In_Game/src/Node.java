@@ -1,3 +1,8 @@
+/**
+ * Author: Zhe Ji 
+ * A node that only takes hashmap 
+ * Node can have multiple children and a single parent 
+ */
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
