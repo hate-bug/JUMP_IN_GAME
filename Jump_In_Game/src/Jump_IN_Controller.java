@@ -213,7 +213,6 @@ public class Jump_IN_Controller {
 	}
 	
 	public class SaveButtonListener implements ActionListener {
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
@@ -231,7 +230,6 @@ public class Jump_IN_Controller {
 	}
 	
 	public class LoadButtonListener implements ActionListener {
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
