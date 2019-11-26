@@ -2,12 +2,17 @@
  * The board is the model of the game, stores all pieces on it and decide if player can move the piece to desired place 
  * @author zhe Ji, XiLing Wang, Junyuan Chen, Defa Hu, Jiawei Ma 
  */
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
 
-public class Jump_IN_Model {
+public class Jump_IN_Model implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3774834906648239009L;
 	private final static int row=5;
 	private final static int column=5;
 	private final static String hole = "O";

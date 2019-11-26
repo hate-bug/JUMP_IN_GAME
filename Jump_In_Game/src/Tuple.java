@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /**
  * A self-created Tuple data structure for this game
  * Store a piece of coordinator like (2, 4), get rid of array
@@ -5,8 +7,12 @@
  * @author zheji, Defa Lu 
  *
  */
-public class Tuple {
+public class Tuple implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9074964477709364933L;
 	private int x; 
 	private int y; 
 	private int x1;

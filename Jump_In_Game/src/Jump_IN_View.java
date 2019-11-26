@@ -2,12 +2,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,7 +16,9 @@ import javax.swing.SwingConstants;
 public class Jump_IN_View extends JFrame {
 	private JMenuBar menubar = new JMenuBar();
 	private JMenu gameMenu = new JMenu("Game"); 
-	private JMenuItem startMenu = new JMenuItem ("Start Game");
+	private JMenuItem startNewGameMenu = new JMenuItem ("Start New Game");
+	private JMenuItem saveGameMenu = new JMenuItem("Save Game");
+	private JMenuItem loadGameMenu = new JMenuItem("Load Game");
 	private JMenu levelMenu = new JMenu("Level");
 	private JMenuItem chooseLevel1Menu = new JMenuItem("Choose Level");
 	private JButton undoButton = new JButton ("Undo");
@@ -38,7 +34,9 @@ public class Jump_IN_View extends JFrame {
 	public Jump_IN_View () {
 		
 		this.menubar.add(this.gameMenu);
-		this.gameMenu.add(startMenu);
+		this.gameMenu.add(startNewGameMenu);
+		this.gameMenu.add(saveGameMenu);
+		this.gameMenu.add(loadGameMenu);
 		this.menubar.add(levelMenu);
 		this.levelMenu.add(chooseLevel1Menu);
 		super.setJMenuBar(menubar);
@@ -133,7 +131,7 @@ public class Jump_IN_View extends JFrame {
 	}
 	
 	public void addNewGameButtonListener (ActionListener newGameButtonListener) {
-		this.startMenu.addActionListener(newGameButtonListener);
+		this.startNewGameMenu.addActionListener(newGameButtonListener);
 	}
 	
 	
@@ -155,5 +153,13 @@ public class Jump_IN_View extends JFrame {
 	
 	public void addHintButtonListener (ActionListener HintButtonListener) {
 		this.hintButton.addActionListener(HintButtonListener);
+	}
+	
+	public void addSaveButtonListener (ActionListener SaveButtonListener) {
+		this.saveGameMenu.addActionListener(SaveButtonListener);
+	}
+	
+	public void addLoadButtonListener (ActionListener LoadButtinListener) {
+		this.loadGameMenu.addActionListener(LoadButtinListener);
 	}
 }
