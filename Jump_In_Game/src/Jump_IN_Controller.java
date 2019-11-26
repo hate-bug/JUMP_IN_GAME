@@ -37,6 +37,8 @@ public class Jump_IN_Controller {
 		this.view.addUndoButtonListener(new UndoButtonListener());
 		this.view.addRedoButtonListener(new RedoButtonListener());
 		this.view.addHintButtonListener(new HintButtonListener());
+		this.view.addSaveButtonListener(new SaveButtonListener());
+		this.view.addLoadButtonListener(new LoadButtonListener());
 		for (int x=0; x<5; x++) {
 			for (int y=0; y<5; y++) {
 				this.view.addGridButtonListener(x, y, new GridButtonListener(new Tuple(x, y)));
@@ -210,4 +212,40 @@ public class Jump_IN_Controller {
 		
 	}
 	
+	public class SaveButtonListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			try {
+				FileOutputStream fout = new FileOutputStream(System.getProperty("user.dir") + "/Jump_In_Game_Status.txt");
+				ObjectOutputStream out  =new ObjectOutputStream(fout);
+				out.writeObject(model);
+				out.close();
+				fout.close();
+			} catch (IOException e2) {
+				e2.printStackTrace();
+			}
+			
+		}
+		
+	}
+	
+	public class LoadButtonListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			try {
+				FileInputStream fin = new FileInputStream(System.getProperty("user.dir") + "/Jump_In_Game_Status.txt");
+				ObjectInputStream objectFile = new ObjectInputStream(fin); 
+				Jump_IN_Model newModel = (Jump_IN_Model) objectFile.readObject();
+				objectFile.close();
+				fin.close();
+				model = new Jump_IN_Model();
+				model = newModel;
+				view.setupButtons(model.setupBoard());
+			} catch (IOException | ClassNotFoundException e3) {
+				e3.printStackTrace();
+			}
+			
+		}
+		
+	}
 }
