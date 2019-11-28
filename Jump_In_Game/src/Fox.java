@@ -5,6 +5,11 @@
  */
 public class Fox extends Piece{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1492497377848089298L;
+
 	public Fox (pieceName name) {
 		super(name);
 	}

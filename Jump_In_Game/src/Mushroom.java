@@ -5,6 +5,11 @@
  */
 public class Mushroom extends Piece {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4357428729616823935L;
+
 	public Mushroom (pieceName name) {
 		super(name);
 	}

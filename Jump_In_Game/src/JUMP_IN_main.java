@@ -12,6 +12,7 @@ public class JUMP_IN_main {
 		//game.play();
 		Jump_IN_View view = new Jump_IN_View();
 		Jump_IN_Model model = new Jump_IN_Model();
+		@SuppressWarnings("unused")
 		Jump_IN_Controller controller = new Jump_IN_Controller(view, model);
 	}
 

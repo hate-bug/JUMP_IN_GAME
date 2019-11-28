@@ -101,19 +101,19 @@ public class Jump_IN_Model implements Serializable{
 	 */
 	public boolean isFinished () {
 		int inHole = 0;
-		if (!(this.grid[0][0]).equals("O")) {
+		if ((this.grid[0][0]).startsWith("R")) {
 			inHole ++; 
 		}
-		if (!(this.grid[0][4]).equals("O")) {
+		if ((this.grid[0][4]).startsWith("R")) {
 			inHole ++; 
 		}
-		if (!(this.grid[2][2]).equals("O")) {
+		if ((this.grid[2][2]).startsWith("R")) {
 			inHole ++; 
 		}
-		if (!(this.grid[4][0]).equals("O")) {
+		if ((this.grid[4][0]).startsWith("R")) {
 			inHole ++; 
 		}
-		if (!(this.grid[4][4]).equals("O")) {
+		if ((this.grid[4][4]).startsWith("R")) {
 			inHole ++; 
 		}
 		if (inHole == 3) {
