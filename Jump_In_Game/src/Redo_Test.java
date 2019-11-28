@@ -1,6 +1,4 @@
 import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,17 +33,23 @@ class Redo_Test {
 		this.model.movePiece(f1, new Tuple (3, 1, 2, 1));//move fox down
 		assertEquals(true, this.model.rollBack()); 
 		assertEquals(f1.getName(), this.model.getPiece(new Tuple(0, 1, 1, 1)));//f1 should go back
-		assertEquals(true, this.model.goForward()); //f1 should go to new location again 
+		//assertEquals(true, this.model.goForward()); //f1 should go to new location again 
+		assertEquals(true, this.model.goForward());
+		this.model.setupBoard();
 		assertEquals(f1.getName(), this.model.getPiece(new Tuple (3, 1)));
 	}
 	
 	@Test
 	public void Redo_Test2() {
+		assertEquals(false, this.model.goForward());
 		this.model.setSelectedPiece(r3.getName());
 		assertEquals(false, this.model.rollBack());//Undo in the beginning, should get false
 		this.model.movePiece(r3, new Tuple(4, 3));
 		assertEquals(true, this.model.rollBack());
 		assertEquals(r3.getName(), this.model.getPiece(new Tuple (4,1))); //r3 should be return back 
+		assertEquals(true, this.model.goForward());
+		model.setupBoard();
+		assertEquals(r3.getName(), this.model.getPiece(new Tuple (4,3))); //r3 should be redone 
 	}
 
 }

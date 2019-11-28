@@ -323,7 +323,7 @@ public class Jump_IN_Model implements Serializable{
 	 */
 	public boolean rollBack(){
 		if (this.history.size()>0) {
-			addRedo();
+			this.redoStack.push(this.pieceLocations);
 			this.pieceLocations = new HashMap<Piece.pieceName, Tuple>();
 			this.pieceLocations.putAll(history.pop());
 			return true;
@@ -338,11 +338,15 @@ public class Jump_IN_Model implements Serializable{
 		this.redoStack.push(currentStatus);
 	}
 	
+	/**
+	 * Function for redo
+	 * @return
+	 */
 	public boolean goForward() {
 		if (this.redoStack.size()>0) {
+			this.history.push(this.pieceLocations);
 			this.pieceLocations = new HashMap<Piece.pieceName, Tuple>();
-			this.pieceLocations.putAll(redoStack.peek());
-			this.history.push(redoStack.pop());
+			this.pieceLocations.putAll(redoStack.pop());
 			return true;
 		} else {
 			return false;
@@ -354,6 +358,10 @@ public class Jump_IN_Model implements Serializable{
 		this.redoStack.clear();
 	}
 	
+	/**
+	 * Find the solver based on current board
+	 * @return The string contains how to move the piece
+	 */
 	public String findSolver() {
 		
 		HashMap<Piece.pieceName, Tuple> currentLocations = new HashMap<Piece.pieceName, Tuple>();
