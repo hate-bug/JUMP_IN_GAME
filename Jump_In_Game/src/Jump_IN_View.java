@@ -32,7 +32,7 @@ public class Jump_IN_View extends JFrame {
 	private static final String dot = "\u2022";
 	
 	/**
-	 * View for game
+	 * View change
 	 */
 	public Jump_IN_View () {
 		
