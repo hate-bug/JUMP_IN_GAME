@@ -31,6 +31,9 @@ public class Jump_IN_View extends JFrame {
 	private JPanel upPanel, panel;
 	private static final String dot = "\u2022";
 	
+	/**
+	 * View change
+	 */
 	public Jump_IN_View () {
 		
 		this.menubar.add(this.gameMenu);
