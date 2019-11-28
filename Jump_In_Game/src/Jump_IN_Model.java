@@ -332,12 +332,6 @@ public class Jump_IN_Model implements Serializable{
 		}
 	}
 	
-	private void addRedo() {
-		HashMap<Piece.pieceName, Tuple> currentStatus = new HashMap<Piece.pieceName, Tuple>(); 
-		currentStatus.putAll(this.pieceLocations);
-		this.redoStack.push(currentStatus);
-	}
-	
 	/**
 	 * Function for redo
 	 * @return

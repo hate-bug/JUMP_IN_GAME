@@ -5,12 +5,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -29,6 +28,7 @@ public class Jump_IN_Controller extends DefaultHandler {
 	private int level = -1;
 	private boolean readlevel, readf1, readf2, readm1, readm2, readr1, readr2, readr3 = false;  
 	private String levelName;
+	private File path;
 	
 	public Jump_IN_Controller (Jump_IN_View view, Jump_IN_Model model) {
 		
@@ -176,16 +176,19 @@ public class Jump_IN_Controller extends DefaultHandler {
 		this.levelName = "level"+ Integer.toString(level);
 		
 		try {
-		    File file = new File(System.getProperty("user.dir") + "/levels.txt");
+			InputStream in = Jump_IN_Controller.class.getClassLoader().getResourceAsStream("levels.txt");			
 		 	SAXParserFactory factory = SAXParserFactory.newInstance();
 			SAXParser saxParser = factory.newSAXParser();
-			saxParser.parse(file, this);
+			saxParser.parse(in, this);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
-
+	
+	private void setPath (File file) {
+		this.path = file;
+	}
 
 	public class GridButtonListener implements ActionListener {
 		private Tuple pieceLocation; 
@@ -312,7 +315,10 @@ public class Jump_IN_Controller extends DefaultHandler {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				FileOutputStream fout = new FileOutputStream(System.getProperty("user.dir") + "/Jump_In_Game_Status.txt");
+				File file = new File ("Game_Status");
+				file.createNewFile();
+				setPath(file);
+				FileOutputStream fout = new FileOutputStream(file, false);
 				ObjectOutputStream out  =new ObjectOutputStream(fout);
 				out.writeObject(model);
 				out.close();
@@ -329,7 +335,11 @@ public class Jump_IN_Controller extends DefaultHandler {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				FileInputStream fin = new FileInputStream(System.getProperty("user.dir") + "/Jump_In_Game_Status.txt");
+				if (path == null) {
+					view.showDialog("you don't have any saved game yet.");
+					return;
+				}
+				FileInputStream fin = new FileInputStream(path);
 				ObjectInputStream objectFile = new ObjectInputStream(fin); 
 				Jump_IN_Model newModel = (Jump_IN_Model) objectFile.readObject();
 				objectFile.close();
@@ -337,6 +347,8 @@ public class Jump_IN_Controller extends DefaultHandler {
 				model = new Jump_IN_Model();
 				model = newModel;
 				view.setupButtons(model.setupBoard());
+				path.delete();
+				path = null;
 			} catch (IOException | ClassNotFoundException e3) {
 				e3.printStackTrace();
 			}
