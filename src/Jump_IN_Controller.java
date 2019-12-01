@@ -171,7 +171,7 @@ public class Jump_IN_Controller extends DefaultHandler {
 	 * For now we just have one level, set it to one by default
 	 * @param level
 	 */
-	private void levels (int level) throws IOException{
+	public void levels (int level) throws IOException{
 
 		this.levelName = "level"+ Integer.toString(level);
 		
