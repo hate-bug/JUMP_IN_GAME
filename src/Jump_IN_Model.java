@@ -2,6 +2,10 @@
  * The board is the model of the game, stores all pieces on it and decide if player can move the piece to desired place 
  * @author zhe Ji, XiLing Wang, Junyuan Chen, Defa Hu, Jiawei Ma 
  */
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +21,7 @@ public class Jump_IN_Model implements Serializable{
 	private final static int column=5;
 	private final static String hole = "O";
 	private String[][] grid;
+	private File path;
 	private HashMap<Piece.pieceName, Tuple> pieceLocations;
 	private Stack <HashMap<Piece.pieceName, Tuple>> history;
 	private Stack <HashMap<Piece.pieceName, Tuple>> redoStack;
@@ -364,4 +369,33 @@ public class Jump_IN_Model implements Serializable{
 		return solver.getNextStep();
 		
 	}
+	
+	public void setPath (File file) {
+		this.path = file;
+	}
+	
+	public File getPath () {
+		return this.path;
+	}
+	
+	/**
+	 * Serialize the model save to the desired files
+	 */
+	public boolean saveBoard (String fileName) {
+		try {
+			File file = new File (fileName);
+			file.createNewFile();
+			setPath(file);
+			FileOutputStream fout = new FileOutputStream(file, false);
+			ObjectOutputStream out  =new ObjectOutputStream(fout);
+			out.writeObject(this);
+			out.close();
+			fout.close();
+			return true;
+		} catch (IOException e2) {
+			e2.printStackTrace();
+			return false;
+		}
+	}
+	
 }
