@@ -311,6 +311,11 @@ public class Jump_IN_Controller extends DefaultHandler {
 		
 	}
 	
+	/**
+	 * Action listener for the save button, save a new file in current path and store the path in model
+	 * @author defa 
+	 *
+	 */
 	public class SaveButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -331,6 +336,10 @@ public class Jump_IN_Controller extends DefaultHandler {
 		
 	}
 	
+	/**
+	 * @author defa hu
+	 * Load the file from stored path. 
+	 */
 	public class LoadButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
