@@ -1,5 +1,5 @@
 /**
- * Author: Zhe Ji
+ * Author: Zhe Ji, Jiawei Ma
  * A node that only takes hashmap 
  * Node can have multiple children and a single parent 
  */
