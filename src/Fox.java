@@ -10,6 +10,10 @@ public class Fox extends Piece{
 	 */
 	private static final long serialVersionUID = 1492497377848089298L;
 
+	/**
+	 * Constructor for the fox class
+	 * @param name
+	 */
 	public Fox (pieceName name) {
 		super(name);
 	}
