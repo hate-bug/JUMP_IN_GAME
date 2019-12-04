@@ -13,7 +13,5 @@ public class Mushroom extends Piece {
 	public Mushroom (pieceName name) {
 		super(name);
 	}
-	/**
-	 * testing testing
-	 */
+	
 }
