@@ -6,7 +6,7 @@
 public class Mushroom extends Piece {
 	
 	/**
-	 * 
+	 * test
 	 */
 	private static final long serialVersionUID = 4357428729616823935L;
 
