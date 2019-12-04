@@ -3,11 +3,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
@@ -28,7 +26,6 @@ public class Jump_IN_Controller extends DefaultHandler {
 	private int level = -1;
 	private boolean readlevel, readf1, readf2, readm1, readm2, readr1, readr2, readr3 = false;  
 	private String levelName;
-	private File path;
 	
 	public Jump_IN_Controller (Jump_IN_View view, Jump_IN_Model model) {
 		
@@ -171,7 +168,7 @@ public class Jump_IN_Controller extends DefaultHandler {
 	 * For now we just have one level, set it to one by default
 	 * @param level
 	 */
-	private void levels (int level) throws IOException{
+	public void levels (int level) throws IOException{
 
 		this.levelName = "level"+ Integer.toString(level);
 		
@@ -183,11 +180,6 @@ public class Jump_IN_Controller extends DefaultHandler {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-	}
-	
-	private void setPath (File file) {
-		this.path = file;
 	}
 
 	public class GridButtonListener implements ActionListener {
@@ -311,34 +303,33 @@ public class Jump_IN_Controller extends DefaultHandler {
 		
 	}
 	
+	/**
+	 *Action listener for the save button 
+	 *Make a txt file to serialize board class 
+	 *Create a new file named Saved_Game_file   
+	 */
 	public class SaveButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			try {
-				File file = new File ("Game_Status");
-				file.createNewFile();
-				setPath(file);
-				FileOutputStream fout = new FileOutputStream(file, false);
-				ObjectOutputStream out  =new ObjectOutputStream(fout);
-				out.writeObject(model);
-				out.close();
-				fout.close();
-			} catch (IOException e2) {
-				e2.printStackTrace();
-			}
+			model.saveBoard("Jump_In_Game");
 			
 		}
 		
 	}
 	
+	/**
+	 * According to the stored path in the controller
+	 * Load the file as board object
+	 */
 	public class LoadButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			if (model.getPath() == null) {
+				view.showDialog("you don't have any saved game yet.");
+				return;
+			}
 			try {
-				if (path == null) {
-					view.showDialog("you don't have any saved game yet.");
-					return;
-				}
+				File path = model.getPath();
 				FileInputStream fin = new FileInputStream(path);
 				ObjectInputStream objectFile = new ObjectInputStream(fin); 
 				Jump_IN_Model newModel = (Jump_IN_Model) objectFile.readObject();

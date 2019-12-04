@@ -1,6 +1,6 @@
 /**
- * Author: Zhe Ji 
- * A node that only takes hashmap 
+ * Author: Zhe Ji, Defa Hu 
+ * A node that only takes hashmaps 
  * Node can have multiple children and a single parent 
  */
 import java.util.ArrayList;
